@@ -109,7 +109,7 @@ const TemplateEditor = () => {
       ...prev,
       products: [
         ...prev.products,
-        { name: "", description: "", price: "", image: "" },
+        { name: "", description: "", price: "", image: "", sku: "", unit: "" },
       ],
     }));
   };
@@ -786,34 +786,42 @@ const TemplateEditor = () => {
                             <X className="h-4 w-4" />
                           </Button>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <Input
-                            placeholder="Product name"
-                            value={product.name}
-                            onChange={(e) =>
-                              updateProduct(index, "name", e.target.value)
-                            }
-                            className="border-2 border-gray-200 dark:border-gray-600 rounded-lg h-12"
-                          />
-                          <Input
-                            placeholder="Price (e.g., $29.99)"
-                            value={product.price}
-                            onChange={(e) =>
-                              updateProduct(index, "price", e.target.value)
-                            }
-                            className="border-2 border-gray-200 dark:border-gray-600 rounded-lg h-12"
-                          />
-                          {template.name != "EduTech Modern" && (
-                            <Input
-                              placeholder="SKU"
-                              value={product.sku}
-                              onChange={(e) =>
-                                updateProduct(index, "sku", e.target.value)
-                              }
-                              className="border-2 border-gray-200 dark:border-gray-600 rounded-lg h-12"
-                            />
-                          )}
-                        </div>
+                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                           <Input
+                             placeholder="Product name"
+                             value={product.name}
+                             onChange={(e) =>
+                               updateProduct(index, "name", e.target.value)
+                             }
+                             className="border-2 border-gray-200 dark:border-gray-600 rounded-lg h-12"
+                           />
+                           <Input
+                             placeholder="Price (e.g., $29.99)"
+                             value={product.price}
+                             onChange={(e) =>
+                               updateProduct(index, "price", e.target.value)
+                             }
+                             className="border-2 border-gray-200 dark:border-gray-600 rounded-lg h-12"
+                           />
+                         </div>
+                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                           <Input
+                             placeholder="SKU (e.g., PROD-001)"
+                             value={product.sku || ""}
+                             onChange={(e) =>
+                               updateProduct(index, "sku", e.target.value)
+                             }
+                             className="border-2 border-gray-200 dark:border-gray-600 rounded-lg h-12"
+                           />
+                           <Input
+                             placeholder="Unit (e.g., piece, kg, liter)"
+                             value={product.unit || ""}
+                             onChange={(e) =>
+                               updateProduct(index, "unit", e.target.value)
+                             }
+                             className="border-2 border-gray-200 dark:border-gray-600 rounded-lg h-12"
+                           />
+                         </div>
                         <Textarea
                           placeholder="Product description"
                           value={product.description}
