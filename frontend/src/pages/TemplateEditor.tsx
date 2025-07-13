@@ -803,7 +803,7 @@ const TemplateEditor = () => {
                             }
                             className="border-2 border-gray-200 dark:border-gray-600 rounded-lg h-12"
                           />
-                          {template.name != "education-template-1" && (
+                          {template.name != "EduTech Modern" && (
                             <Input
                               placeholder="SKU"
                               value={product.sku}
