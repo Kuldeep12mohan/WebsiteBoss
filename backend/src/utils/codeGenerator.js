@@ -52,6 +52,7 @@ const generateWebsiteCode = (template, customData) => {
             <h3 class="product-name">${product.name || 'Product Name'}</h3>
             <p class="product-description">${product.description || 'Product description'}</p>
             <span class="product-price">${product.price || '$0.00'}</span>
+            <span class="product-price">${product.sku || '0'}</span>
           </div>
         `;
       });
