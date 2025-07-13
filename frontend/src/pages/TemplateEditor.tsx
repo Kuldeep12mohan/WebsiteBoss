@@ -803,6 +803,16 @@ const TemplateEditor = () => {
                             }
                             className="border-2 border-gray-200 dark:border-gray-600 rounded-lg h-12"
                           />
+                          {template.name != "education-template-1" && (
+                            <Input
+                              placeholder="SKU"
+                              value={product.sku}
+                              onChange={(e) =>
+                                updateProduct(index, "sku", e.target.value)
+                              }
+                              className="border-2 border-gray-200 dark:border-gray-600 rounded-lg h-12"
+                            />
+                          )}
                         </div>
                         <Textarea
                           placeholder="Product description"
