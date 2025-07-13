@@ -1,0 +1,71 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String
+  password  String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  projects Project[]
+
+  @@map("users")
+}
+
+model Template {
+  id            String   @id @default(cuid())
+  name          String
+  industry      String
+  description   String
+  preview_image String?  @map("preview_image")
+  html_content  String   @map("html_content")
+  css_content   String   @map("css_content")
+  js_content    String?  @map("js_content")
+  fields        Json     // Dynamic fields for template customization
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  projects Project[]
+
+  @@map("templates")
+}
+
+model Project {
+  id           String   @id @default(cuid())
+  name         String
+  userId       String   @map("user_id")
+  templateId   String   @map("template_id")
+  customData   Json     @map("custom_data") // User's custom content
+  html_content String?  @map("html_content") // Generated HTML
+  css_content  String?  @map("css_content")  // Generated CSS
+  js_content   String?  @map("js_content")   // Generated JS
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  template Template @relation(fields: [templateId], references: [id])
+
+  @@map("projects")
+}
+
+model Upload {
+  id        String   @id @default(cuid())
+  filename  String
+  originalName String @map("original_name")
+  mimetype  String
+  size      Int
+  path      String
+  userId    String?  @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("uploads")
+}
